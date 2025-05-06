@@ -141,7 +141,7 @@ int main(int argc, char* argv[]) {
                     col_number++;
                 }
                 std::string column_name;
-                int column_index;
+                int column_index = -1;
                 for (int i=0; i<columns.size(); i++) {
                     ss.str("");
                     ss.clear();
@@ -154,6 +154,9 @@ int main(int argc, char* argv[]) {
                         break;
                     }
 
+                }
+                if (column_index == -1) {
+                    std::cerr << "never found column" << std::endl;
                 }
                 
                 unsigned short num_rows = get_num_rows(database_file, page_offset);
