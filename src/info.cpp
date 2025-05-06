@@ -169,9 +169,11 @@ std::vector<std::string> get_leaf_cell_values(std::ifstream& db_file, unsigned s
             } else {
                 val_offset = record_header_offset + RECORD_HEADER_SIZE + sizes[i-1] + j;
             }
-            db_file.seekg(val_offset);
-            db_file.read(&buffer, 1);
-            value.push_back(buffer);
+            if (sizes[i] > 0) {
+                db_file.seekg(val_offset);
+                db_file.read(&buffer, 1);
+                value.push_back(buffer);
+            }
         }
         val_str = std::string(value.data(), value.size());
         value.clear();
